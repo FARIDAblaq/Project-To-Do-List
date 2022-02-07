@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import styled from 'styled-components/macro'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import TodoList from './components/TodoList/TodoList'
+import Filter from './components/TodoList/Filter'
 
-export default App;
+
+const Component = styled.div `
+    display:flex;
+    background-color:#fafafa;
+    min-height:100vh;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:1rem;
+    margin:1rem;
+`
+
+
+const Wrapper = styled.div `
+    width:100%
+    max-width:800px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    // border:1px solid black;
+    `
+const Header = styled.h1 `
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:2.5rem;
+`
+
+
+const App = () => (
+    <Component>
+        <Wrapper>
+            <Header>Farida's To do List</Header>
+            <TodoList />
+            {/* <Filter /> */}
+        </Wrapper>
+    </Component>
+)
+
+export default App
