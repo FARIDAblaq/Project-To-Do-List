@@ -1,8 +1,11 @@
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components/macro'
-import TodoList from './TodoList'
-import {  v4 as uuidv4 } from 'uuid'
-//import './TodoList'
+//import Checkbox from '@material-ui/core/Checkbox'
+import Checkbox from '@material-ui/core/Checkbox'
+import Chip from '@material-ui/core/Chip'
+import DoneIcon from '@material-ui/icons/Done'
+import DeleteIcon from '@material-ui/icons/Delete'
+
 
 const Component = styled.div`
 padding: 1rem;
@@ -62,7 +65,7 @@ flex:1;
 const Complete = styled.button`
 ${buttonStyles}
 
-border: ${props => props.completed ? 0: '1px solid #e2e8f0'}
+border: ${props => props.completed ? 0: '1px solid #e2e8f0'};
 
 `
 
@@ -70,8 +73,8 @@ const Label = styled.p`
 margin: 0 0 0 0.5rem;
 flex: 1;
 
-text-decoration:${props => props.completed ? 'line-through': 'none'}
-color: ${props => props.completed ? '#4A5568':'#000'}
+text-decoration:${props => props.completed ? 'line-through': 'none'};
+color: ${props => props.completed ? '#4A5568':'#000'};
 
 
 &:hover{
@@ -87,25 +90,29 @@ ${deletebuttonStyles}
 border;0;
 border-radius:0%;
 `
-
+const NoItems = styled.p`
+margin: 0;
+text-align: center;
+color: #4a5568;
+`
 
 
 const List = ({items,onComplete, onDelete}) => (
 <Component>
-    {items.map((item,completed,label) => (
-        <Item key={item.id}>
+    {items.map(({id,completed,label}) => (
+        <Item key={id}>
             <Complete completed={completed} 
             onClick={onComplete(id)}>{completed && (
-            <span role ='img' aria-label='complete' >c
-            </span>)}
+             <DoneIcon />)}
             </Complete>
             <Label completed={completed}>{label}</Label>
-            <Delete onClick={onDelete(id)}>Delete</Delete>
+            <DeleteIcon onClick={onDelete(id)} />
         </Item>
     )
 
     )
     }
+    {items.length===0 && <NoItems> You have No items</NoItems>}
     
 
 </Component>)

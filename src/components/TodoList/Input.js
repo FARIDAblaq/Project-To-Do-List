@@ -11,7 +11,7 @@ min-width:400px;
 `
 
 const StyledInput = styled.input`
-width:100%;
+width:80%;
 padding: 1rem;
 border:0;`
 
@@ -21,6 +21,14 @@ border-left:1px solid #e2e8f0;
 background-color:#68d391;
 color: #fff;
 padding: 1rem 2 rem;
+width:40px;
+height:40px;
+display:flex;
+align-items: center;
+justify-content: center;
+padding:0;
+font-weight: 400;
+flex:1;
 
 transition all 0.25s ease-in-out;
 

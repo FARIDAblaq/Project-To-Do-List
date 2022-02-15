@@ -42,11 +42,13 @@ class TodoList extends Component {
     }
 
     handleComplete = (id) => () => {
-        const newItems = [this.state.items]
+        const newItems = [...this.state.items]
 
         const filteredItem =  newItems.filter((item) => item.id === id)[0]
 
         filteredItem.completed = !filteredItem.completed
+
+        this.setState({item: newItems})
     }
 
     handleDelete = (id) =>()=>{
@@ -66,9 +68,11 @@ class TodoList extends Component {
 
         }
 
-        const newItems = [task,...this.items]
+        const newItems = [task, ...this.state.items]
 
         this.setState({ items : newItems})
+    //    console.log(value)
+    //    console.log(uuidv4())
     }
 
     render() {
@@ -76,10 +80,10 @@ class TodoList extends Component {
 
         let filteredItems = []
         if(mode==='completed'){
-            filteredItems = items.filter(item =>item.completed==='true')
+            filteredItems = items.filter(item =>item.completed===true)
             
-        }else if(mode==='active'){
-            filteredItems = items.filter(item =>item.completed==='false')
+        }else if(mode ==='active'){
+            filteredItems = items.filter(item =>item.completed===false)
         }
         else{
             filteredItems = items
@@ -90,8 +94,10 @@ class TodoList extends Component {
             <Wrapper>
                 <Filter  mode={mode} 
                 onModeChange={this.handleModeChange}/>
-                < Input onTaskAdd={this.handleTaskAdd} />
-                <List items={items}
+
+                <Input onTaskAdd={this.handleTaskAdd} />
+
+                <List items={filteredItems}
                 onComplete={this.handleComplete}
                 onDelete={this.handleDelete} />
             </Wrapper>

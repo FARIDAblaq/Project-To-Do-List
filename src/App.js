@@ -2,8 +2,6 @@ import React from "react"
 import styled from 'styled-components/macro'
 
 import TodoList from './components/TodoList/TodoList'
-import Filter from './components/TodoList/Filter'
-import Input from './components/TodoList/Input'
 
 
 const Component = styled.div `
@@ -37,9 +35,11 @@ const App = () => (
     <Component>
         <Wrapper>
             <Header>Farida's To do List</Header>
+
+
             <TodoList />
-            {/* <Filter /> */}
-            {/* <Input /> */}
+            
+
 
         </Wrapper>
     </Component>
