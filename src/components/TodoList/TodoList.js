@@ -14,35 +14,40 @@ box-shadow: 0 5px 10px 0 rgba(0,0,0.15);
 min-width:400px;
 text-align:center;`
 
-class TodoList extends Component {
-    state = {
-        mode:'all',
-
-        items: [
-            {
-                id:1,
-                label:'I will finish this <List/> today',
-                completed: false
-            },
-            {
-                id:2,
-                label:'I will finish this  today',
-                completed: false
-            },
-            {
-                id:3,
-                label:'I will finish this  today',
-                completed: true
-            }
-        ]
+class TodoList extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            mode:'all',
+    
+            items: [
+                {
+                    id:1,
+                    label:'I will finish this <List/> today',
+                    completed: false
+                },
+                {
+                    id:2,
+                    label:'I will finish this  today',
+                    completed: false
+                },
+                {
+                    id:3,
+                    label:'I will finish this  today',
+                    completed: true
+                }
+            ]
+        }
+        
     }
+    
 
     handleModeChange = (mode) => () => {
         this.setState({ mode }) 
     }
 
     handleComplete = (id) => () => {
-        const newItems = [...this.state.items]
+        const newItems = [...this.state.items] //there's no need to do this
 
         const filteredItem =  newItems.filter((item) => item.id === id)[0]
 
@@ -71,8 +76,17 @@ class TodoList extends Component {
         const newItems = [task, ...this.state.items]
 
         this.setState({ items : newItems})
-    //    console.log(value)
-    //    console.log(uuidv4())
+    }
+
+    handleUpdate = (newvalue)=>{
+        const newtasks = {
+            id:uuidv4(),
+            label:newvalue,
+            completed:false
+        }
+      
+       const newItems = [newtasks,...this.state.items]
+       this.setState({items : newItems}) 
     }
 
     render() {
@@ -95,11 +109,13 @@ class TodoList extends Component {
                 <Filter  mode={mode} 
                 onModeChange={this.handleModeChange}/>
 
-                <Input onTaskAdd={this.handleTaskAdd} />
+                <Input onTaskAdd={this.handleTaskAdd}
+                onUpdate={this.handleUpdate} />
 
                 <List items={filteredItems}
                 onComplete={this.handleComplete}
-                onDelete={this.handleDelete} />
+                onDelete={this.handleDelete}
+                />
             </Wrapper>
 
         )

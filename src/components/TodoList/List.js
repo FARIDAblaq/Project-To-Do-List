@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components/macro'
-//import Checkbox from '@material-ui/core/Checkbox'
-import Checkbox from '@material-ui/core/Checkbox'
-import Chip from '@material-ui/core/Chip'
 import DoneIcon from '@material-ui/icons/Done'
 import DeleteIcon from '@material-ui/icons/Delete'
+
+import Input from './Input'
+
 
 
 const Component = styled.div`
@@ -22,7 +22,7 @@ align-items: center;
 `
 
 const buttonStyles = `
-background-color:transparent;
+background-color:#ed2f7;
 width:20px;
 height:20px;
 border-radius:50%;
@@ -43,12 +43,11 @@ font-size: 0.9rem;
 `
 const deletebuttonStyles = `
 background-color:#ed2f7;
-width:80px;
+width:40px;
 height:40px;
 display:flex;
 align-items: center;
 justify-content: center;
-padding:0;
 font-weight: 400;
 flex:1;
 
@@ -84,7 +83,7 @@ color: ${props => props.completed ? '#4A5568':'#000'};
 }
 `
 
-const Delete = styled.button`
+const Button = styled.button`
 ${deletebuttonStyles}
 
 border;0;
@@ -100,12 +99,14 @@ color: #4a5568;
 const List = ({items,onComplete, onDelete}) => (
 <Component>
     {items.map(({id,completed,label}) => (
+    
         <Item key={id}>
             <Complete completed={completed} 
             onClick={onComplete(id)}>{completed && (
              <DoneIcon />)}
             </Complete>
             <Label completed={completed}>{label}</Label>
+            <Button >Update</Button>
             <DeleteIcon onClick={onDelete(id)} />
         </Item>
     )
