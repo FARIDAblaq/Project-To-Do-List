@@ -50,21 +50,6 @@ class Input extends Component{
         edit: false
     }
 
-    //const [isUpdate, setIsUpdate] = useState(false);
-
-    handleeditForm(id) {
-        return (<Wrapper>
-            <StyledInput type='text'
-                placeholder='Add item'
-                value= {id}
-                onChange={this.handleChange}
-                onKeyPress={this.handleKeyPress}
-            />
-            {this.state.edit && <Button onClick={this.handleSubmit}>Edit</Button>}    
-        </Wrapper>);
-        
-    }
-
     handleChange = (event)=>{
         const inputValue = event.target.value 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components/macro'
 import {  v4 as uuidv4 } from 'uuid'
-
 import Filter from './Filter'
 import Input from './Input'
 import List from './List'
@@ -14,7 +13,7 @@ box-shadow: 0 5px 10px 0 rgba(0,0,0.15);
 min-width:400px;
 text-align:center;`
 
-class TodoList extends React.Component {
+class TodoList extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -78,15 +77,27 @@ class TodoList extends React.Component {
         this.setState({ items : newItems})
     }
 
-    handleUpdate = (newvalue)=>{
-        const newtasks = {
-            id:uuidv4(),
+
+    
+    handleUpdate = (newvalue,id)=>{
+        const newtask={
+            id:id,
             label:newvalue,
             completed:false
         }
-      
-       const newItems = [newtasks,...this.state.items]
-       this.setState({items : newItems}) 
+        console.log(newtask)   
+        
+        console.log(this.state.items)
+        const updatedItem = this.state.items.map((item)=>{
+            if(item.id===newtask.id){
+                item.label=newtask.label
+                
+            }return item
+
+        })
+        //const updatedItem = [updatedItem,...this.state.items]
+        console.log(updatedItem)
+        this.setState({items:updatedItem})
     }
 
     render() {
@@ -110,11 +121,14 @@ class TodoList extends React.Component {
                 onModeChange={this.handleModeChange}/>
 
                 <Input onTaskAdd={this.handleTaskAdd}
-                onUpdate={this.handleUpdate} />
+                />
+
+                {/* <Update onUpdate={this.handleUpdate} /> */}
 
                 <List items={filteredItems}
                 onComplete={this.handleComplete}
                 onDelete={this.handleDelete}
+                onUpdate={this.handleUpdate}
                 />
             </Wrapper>
 

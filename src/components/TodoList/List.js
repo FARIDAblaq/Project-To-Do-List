@@ -2,8 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components/macro'
 import DoneIcon from '@material-ui/icons/Done'
 import DeleteIcon from '@material-ui/icons/Delete'
-
-import Input from './Input'
+import Update from './Update'
 
 
 
@@ -96,8 +95,8 @@ color: #4a5568;
 `
 
 
-const List = ({items,onComplete, onDelete}) => (
-<Component>
+const List = ({items,onComplete, onDelete,onUpdate}) => (
+    <Component>
     {items.map(({id,completed,label}) => (
     
         <Item key={id}>
@@ -106,16 +105,15 @@ const List = ({items,onComplete, onDelete}) => (
              <DoneIcon />)}
             </Complete>
             <Label completed={completed}>{label}</Label>
-            <Button >Update</Button>
+            <Update id={id} onUpdate={onUpdate}/>
             <DeleteIcon onClick={onDelete(id)} />
         </Item>
-    )
+            )
 
     )
     }
-    {items.length===0 && <NoItems> You have No items</NoItems>}
-    
-
-</Component>)
+        {items.length===0 && <NoItems> You have No items</NoItems>}
+    </Component>
+)
 
 export default List
